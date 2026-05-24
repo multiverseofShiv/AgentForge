@@ -228,7 +228,7 @@ Open demo/ws_demo.html and submit a task — you'll see each agent step in real 
 
 ## Project Structure
 
-`
+```
 AgentForge/
 ├── app/
 │   ├── main.py                  # FastAPI entry point
@@ -255,7 +255,7 @@ AgentForge/
 ├── tests/                       # pytest suite
 ├── requirements.txt
 └── README.md
-`
+```
 
 ---
 
