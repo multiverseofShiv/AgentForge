@@ -44,7 +44,7 @@ It's also the agentic half of a two-project GenAI portfolio (companion: DocMind 
 ## Architecture
 
 ### Component Diagram (UML)
-
+```mermaid
 classDiagram
     direction TB
 
@@ -127,6 +127,8 @@ classDiagram
     Researcher  ..> ToolLayer   : uses
     SQLAgent    ..> ToolLayer   : uses
     StateGraph  ..> Langfuse    : traces
+```
+```mermaid
 ### Sequence Diagram — Request Lifecycle
 sequenceDiagram
     autonumber
@@ -170,6 +172,7 @@ sequenceDiagram
     Q-->>G: result
     G-->>API: final_output
     API-->>User: stream via WebSocket
+```
 ---
 
 ## Features
