@@ -47,13 +47,11 @@ It's also the agentic half of a two-project GenAI portfolio (companion: DocMind 
 ```mermaid
 classDiagram
     direction TB
-
     class FastAPI_App {
         +POST /api/v1/tasks
-        +POST /api/v1/tasks/{id}/approve
-        +WS  /api/v1/ws/tasks/{id}
+        +POST /api/v1/tasks/:id/approve
+        +WS  /api/v1/ws/tasks/:id
     }
-
     class StateGraph {
         <<LangGraph>>
         +checkpointer: MemorySaver
@@ -61,7 +59,6 @@ classDiagram
         +compile()
         +astream_events()
     }
-
     class AgentState {
         <<TypedDict>>
         +task: str
@@ -73,46 +70,38 @@ classDiagram
         +status: str
         +human_approval_needed: bool
     }
-
     class Supervisor {
         <<router>>
         -llm: PhiThreeMini_QLORA
         +route(state) SupervisorDecision
     }
-
     class Researcher {
         <<worker>>
         -tools: [web_search, wiki, arxiv]
     }
-
     class Writer {
         <<worker>>
         -temperature: 0.7
     }
-
     class Reviewer {
         <<critic>>
         +returns ReviewDecision
     }
-
     class SQLAgent {
         <<worker>>
         -guard: ReadOnlyRegex
     }
-
     class ToolLayer {
-        <<@tool>>
+        <<tool>>
         +web_search()
         +search_wikipedia()
         +search_arxiv()
         +execute_sql()
         +generate_chart()
     }
-
     class Langfuse {
         <<observability>>
     }
-
     FastAPI_App --> StateGraph  : invokes
     StateGraph  o-- AgentState  : owns
     StateGraph  --> Supervisor  : entry
@@ -128,8 +117,8 @@ classDiagram
     SQLAgent    ..> ToolLayer   : uses
     StateGraph  ..> Langfuse    : traces
 ```
+----- 
 ```mermaid
-### Sequence Diagram — Request Lifecycle
 sequenceDiagram
     autonumber
     actor User
@@ -141,14 +130,12 @@ sequenceDiagram
     participant V as Reviewer
     participant Q as SQL Agent
     participant H as Human Approver
-
     User->>API: POST /tasks {task}
     API->>G: invoke(AgentState)
     G->>S: route(state)
     S-->>G: researcher
     G->>R: run
     R-->>G: research_notes
-
     loop critic loop (max 3)
         G->>W: run
         W-->>G: draft
@@ -160,13 +147,11 @@ sequenceDiagram
             Note right of V: exit loop
         end
     end
-
     Note over G,Q: interrupt_before=[sql_agent]
     G-->>API: paused (approval_required)
     API-->>User: 200 (approval_required: true)
-
     User->>H: review proposed SQL
-    H->>API: POST /tasks/{id}/approve
+    H->>API: POST /tasks/:id/approve
     API->>G: resume (thread_id)
     G->>Q: run
     Q-->>G: result
