@@ -22,7 +22,7 @@ class ArxivInput(BaseModel):
     
     
 @tool(args_schema=ArxivInput)
-def arxiv_search(query: str, max_results: int = 3) -> str:
+def search_arxiv(query: str, max_results: int = 3) -> str:
     """Search arxiv for academic papers on a research topic.
     
     Use this when the question is technical or scientific and credible papers would stengthen the answer. Returns the title, authors, publication date, abstract, and arXiv URL for each paper. Not suitable for general-purpose questions - prefer 'web_search' or 'search_wikipedia for those."""
@@ -49,7 +49,7 @@ def arxiv_search(query: str, max_results: int = 3) -> str:
         if len(paper.authors)>5:
             authors +=f",+{len(paper.authors)-5} more"
             
-        published = paper.published.date().isoformat() if  paper.puq else "n/a"
+        published = paper.published.date().isoformat() if  paper.published else "n/a"
         
         abstract = (paper.summary or "").strip().replace("\n"," ")
         chunks.append(

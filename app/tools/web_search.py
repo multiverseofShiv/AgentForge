@@ -91,3 +91,12 @@ def web_search(query: str, max_results: int = 5) -> str:
     except Exception as exc:
         logger.exception("Duck Duck go search failed")
         return f"web search failed: {exc}"
+    
+    
+    
+    
+#test
+# python -c "from app.tools import web_search; print(web_search.invoke({'query':'Langgraph Supervisor pattern'}))"
+# python -c "from app.tools import search_wikipedia; print(search_wikipeia.invoke({'query':'RAG - Retreival Argumentated Generation'}))"
+# python -c "from app.tools import search_arxiv; print(search_arxiv.invoke({'query':'mixture of experts routing', 'max_results':2}))"
+# python -c "import base64; from app.tools import generate_chart; out = generate_chart.invoke({'chart_type':'bar', 'labels': ['Rock','Jazz', 'Pop'], 'values':[120,45,80], 'title': 'smoke-test'}); open('chart.png','wb').write(base64.b64decode(out.split(',',1)[1]))"

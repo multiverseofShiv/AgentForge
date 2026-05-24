@@ -20,12 +20,14 @@ class Settings(BaseSettings):
     langfuse_host: str= ""
     
     huggingface_token: str = ""
-    supervisor_model: str = "llama"
+    supervisor_model: str = "llama-3.1-8b-instant"
     temperature_factual: float= 0.0
     temperature_creative: float = 0.0
     
-    app_env: str = "developent"
+    app_env: str = "development"
     log_level: str = "INFO"
+    
+    chinook_db_path: str = "F:/Portfolio_Projects/AgentForge/app/data/chinook.db"
     
     
 @lru_cache(maxsize=1)

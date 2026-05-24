@@ -6,7 +6,7 @@ class SupervisorDecision(BaseModel):
     
     
     next_agent: Literal["researcher","writer","reviewer","sql_agent","FINISH"]
-    resaoning: str= Field(description="Brief explanation for the routing decision")
+    reasoning: str= Field(description="Brief explanation for the routing decision")
     human_approval_needed: bool = Field(
         default= False,
         description="Set True when task requires human sign off before Proceeding"
@@ -28,7 +28,7 @@ class TaskRequest(BaseModel):
     min_length = 5,
     max_length = 2000,
     description = "Natural language task description for the agent pipeline",
-    examples = ["Research anf write a 500-word report on quantom computing trenda"]
+    examples = ["Research and write a 500-word report on quantom computing trenda"]
     )
     context : Optional[str] = Field(
         default= None,
