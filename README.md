@@ -37,8 +37,6 @@ Most "agent" demos are toy scripts that break in production. AgentForge is built
 | Hard to debug what an agent did | Live WebSocket trajectory + Langfuse traces |
 | One framework lock-in | Same workflow implemented in LangGraph and CrewAI for comparison |
 
-It's also the agentic half of a two-project GenAI portfolio (companion: DocMind for production RAG).
-
 ---
 
 ## Architecture
@@ -288,26 +286,6 @@ AgentForge/
 | Router latency (GPT-4o-mini) | ~500 ms |
 | Cost per 1k routing decisions (local vs GPT-4o-mini) | $0 vs $0.05 |
 | Quality lift from critic loop (round 1) | +18% |
-
-> Reproduce: `python finetune/eval_router.py` and `python evals/agent_eval.py`
-
----
-
-## Roadmap
-
-- [x] Scaffold, state, schemas, LLM factory
-- [x] Tools (web, wiki, arXiv, SQL, chart)
-- [x] Agents (researcher, writer, reviewer, SQL)
-- [x] Supervisor + StateGraph + conditional edges
-- [ ] Writer → Reviewer critic loop
-- [ ] HITL + checkpointing
-- [ ] WebSocket live progress UI
-- [ ] CrewAI alternative
-- [ ] Langfuse tracing
-- [ ] QLoRA router fine-tune + integration
-- [ ] Agent evaluation (trajectory + outcome)
-- [ ] Docker + Render deploy
-- [ ] Demo GIF + Loom walkthrough
 
 ---
 
