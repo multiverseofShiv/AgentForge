@@ -65,3 +65,20 @@ def get_compiled_graph():
     compiled = graph.compile()
     logger.info("AgentForge graph compiled - nodes: %s", list(compiled.nodes))
     return compiled    
+
+
+def get_hitl_graph():
+    
+    from langgraph.checkpoint.memory import MemorySaver
+    
+    graph = build_graph()
+    checkpointer = MemorySaver()
+    compiled = graph.compile(
+        checkpointer=checkpointer,
+        interrupt_before=["sql_agent"],
+    )
+    
+    logger.info("AgentForge Graph Compiled (HITL) - nodes: %s, interrupt_before: ['sql_agent']",
+                list(compiled.nodes),
+                )
+    return compiled

@@ -1,4 +1,4 @@
-from app.agents.graph import build_graph, get_compiled_graph
+from app.agents.graph import build_graph, get_compiled_graph, get_hitl_graph
 
 from app.agents.nodes import(
     researcher_node,
@@ -14,6 +14,7 @@ __all__ = [
     "AgentState",
     "build_graph",
     "get_compiled_graph",
+    "get_hitl_graph",
     "supervisor_node",
     "researcher_node",
     "writer_node",

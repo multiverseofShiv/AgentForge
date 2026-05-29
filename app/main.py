@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
-from app.api.routes import tasks, websockets
+from AgentForge.app.api.routes import websocket
+from app.api.routes import tasks
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -26,7 +27,7 @@ app.add_middleware(
 
 
 app.include_router(tasks.router, prefix="/api/v1", tags=["tasks"])
-app.include_router(websockets.router, prefix="/api/v1", tags=["websocket"])
+app.include_router(websocket.router, prefix="/api/v1", tags=["websocket"])
 
 
 @app.get("/health", tags=["health"])

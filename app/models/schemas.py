@@ -39,6 +39,12 @@ class TaskRequest(BaseModel):
 class TaskResoponse(BaseModel):
     
     task_id: str
-    status : Literal["accepted","running","done","error"]
+    status : Literal["accepted","running","awaiting_approval","done","error"]
     message: Optional[str] = None
     result: Optional[str] = None
+    
+class ApproveRequest(BaseModel):
+    
+    approved: bool = Field(
+        description="True to resume execution; False to abort the task",
+    )
